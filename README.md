@@ -47,55 +47,19 @@ iface eth4 inet static
 ```
 auto eth0
 iface eth0 inet static
-    address 192.248.1.2
+    address 192.248.3.2
     netmask 255.255.255.0
-    gateway 192.248.1.1
+    gateway 192.248.3.1
 ```
 #### Georgopol (DNS Slave)
 ```
 auto eth0
 iface eth0 inet static
-    address 192.248.1.3
+    address 192.248.4.2
     netmask 255.255.255.0
-    gateway 192.248.1.1
+    gateway 192.248.4.1
 ```
 #### Severny (Web Server)
-```
-auto eth0
-iface eth0 inet static
-    address 192.248.3.2
-    netmask 255.255.255.0
-    gateway 192.248.3.1
-```
-
-#### Lipovka (Web Server)
-```
-auto eth0
-iface eth0 inet static
-    address 192.248.3.3
-    netmask 255.255.255.0
-    gateway 192.248.3.1
-```
-
-#### Stalber (Web Server)
-```
-auto eth0
-iface eth0 inet static
-    address 192.248.3.4
-    netmask 255.255.255.0
-    gateway 192.248.3.1
-```
-
-#### Mylta (Load Balancer)
-```
-auto eth0
-iface eth0 inet static
-    address 192.248.3.5
-    netmask 255.255.255.0
-    gateway 192.248.3.1
-```
-
-#### Zharki (Client)
 ```
 auto eth0
 iface eth0 inet static
@@ -104,7 +68,7 @@ iface eth0 inet static
     gateway 192.248.2.1
 ```
 
-#### YasnayaPolyana (Client)
+#### Lipovka (Web Server)
 ```
 auto eth0
 iface eth0 inet static
@@ -113,11 +77,47 @@ iface eth0 inet static
     gateway 192.248.2.1
 ```
 
-#### Primorsk (Client)
+#### Stalber (Web Server)
 ```
 auto eth0
 iface eth0 inet static
     address 192.248.2.4
     netmask 255.255.255.0
     gateway 192.248.2.1
+```
+
+#### Mylta (Load Balancer)
+```
+auto eth0
+iface eth0 inet static
+    address 192.248.2.5
+    netmask 255.255.255.0
+    gateway 192.248.2.1
+```
+
+#### Zharki (Client)
+```
+auto eth0
+iface eth0 inet static
+    address 192.248.1.2
+    netmask 255.255.255.0
+    gateway 192.248.1.1
+```
+
+#### YasnayaPolyana (Client)
+```
+auto eth0
+iface eth0 inet static
+    address 192.248.1.3
+    netmask 255.255.255.0
+    gateway 192.248.1.1
+```
+
+#### Primorsk (Client)
+```
+auto eth0
+iface eth0 inet static
+    address 192.248.1.4
+    netmask 255.255.255.0
+    gateway 192.248.1.1
 ```
