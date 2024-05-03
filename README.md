@@ -301,7 +301,7 @@ host -t PTR 192.248.2.2
 ## SOAL 7
 > Akhir-akhir ini seringkali terjadi serangan siber ke DNS Server Utama, sebagai tindakan antisipasi kamu diperintahkan untuk membuat DNS Slave di Georgopol untuk semua domain yang sudah dibuat sebelumnya
 
-#### Pochinki
+### Pochinki
 Lakukan command berikut untuk mengedit file `/etc/bind/named.conf.local`
 ```
 nano /etc/bind/named.conf.local
@@ -334,7 +334,7 @@ zone "loot.it30.com" {
 
 Restart bind9 dengan `service bind9 restart`
 
-#### Georgopol
+### Georgopol
 Pastikan Georgopol terhubung dengan internet menggunakan `echo nameserver 192.168.122.1 > /etc/resolv.conf` dimana `192.168.122.1` adalah IP Erangel
 
 Jalankan command berikut
@@ -370,3 +370,31 @@ zone "loot.it30.com" {
 ```
 
 Restart bind9 dengan `service bind9 restart`
+
+### Testing
+- Matikan bind9 pada DNS Master atau Pochinki
+```
+service bind9 stop
+```
+
+- Lakukan command berikut untuk semua client (Zharki, YasnayaPolyana, Primorsk)
+```
+nano /etc/resolv.conf
+```
+
+- Edit Konfigurasi untuk semua file `resolv.conf` pada setiap client
+```
+nameserver 192.248.3.2 #IP Pochinki
+nameserver 192.248.4.2 #IP Georgopol
+```
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/c2dfdd34-8c76-4ca4-b012-de83c180ad94)
+
+- Test dengan ping ke domain-domain yang telah dibuat tadi
+- Zharki
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/56f08a09-d656-454a-a9fc-45be0d419037)
+- YasnayaPolyana
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/403d0654-d264-45fb-9bfb-28f66e4989c5)
+- Primorsk
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/fa41f398-aa02-4fb0-b2e5-91bdc3d54a11)
+
+Terlihat semua client berhasil melakukan ping ke semua domain, tandanya konfigurasi DNS Slave telah berhasil
