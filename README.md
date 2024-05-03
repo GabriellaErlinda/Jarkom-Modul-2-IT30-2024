@@ -274,7 +274,7 @@ cp /etc/bind/db.local /etc/bind/jarkom/2.248.192.in-addr.arpa
 ```
 
 Buka file 2.248.192.in-addr.arpa dengan `nano /etc/bind/jarkom/2.248.192.in-addr.arpa` dan edit seperti ini
-![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/1db55f7e-df00-4b01-95a6-3b4beafcfffd)
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/2a7b8587-bacb-4d63-9931-ee8979941cf6)
 
 Restart bind9 dengan `service bind9 restart`
 
@@ -284,3 +284,15 @@ apt-get update
 apt-get install dnsutils
 ```
 Lalu kembalikan nameserver ke Pochinki dengan `echo nameserver 192.248.3.2 > /etc/resolv.conf`
+Jalankan command
+```
+host -t PTR 192.248.2.2
+```
+- Zharki
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/8838ceb4-a927-4603-a570-34f1ac609b81)
+
+- YasnayaPolyana
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/8dec5191-ed02-45f5-908a-bb7f141c4a16)
+
+- Primorsk
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/54088eb4-c115-4461-beca-2fba6fea3168)
