@@ -289,7 +289,7 @@ Jalankan command
 host -t PTR 192.248.2.2
 ```
 - Zharki
-![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/8838ceb4-a927-4603-a570-34f1ac609b81)
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/eab4d58e-6239-4f95-8ec1-384cbf9574cc)
 
 - YasnayaPolyana
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/8dec5191-ed02-45f5-908a-bb7f141c4a16)
