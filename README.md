@@ -482,6 +482,7 @@ nano /etc/bind/named.conf.options
 ```
 allow-query{any;};
 ```
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/04f7be7a-4362-492b-ba2e-b511e8a328ff)
 
 - Buka dan edit file `/etc/bind/named.conf.local`, tambahkan konfigurasi di bawah ini
 ```
@@ -490,6 +491,7 @@ zone "siren.redzone.it30.com" {
     file "/etc/bind/siren/siren.redzone.it30.com";
 };
 ```
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/eb8c1bf5-6b24-4cd5-a980-abccf9b23de2)
 
 - Buat folder siren dan copy `db.local` ke `siren.redzone.it30.com`
 ```
@@ -515,6 +517,7 @@ $TTL    604800
 www     IN      CNAME   siren.redzone.it30.com.
 @       IN      AAAA    ::1
 ```
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/8dd52e8e-9ff5-45eb-98d0-792db3b36815)
 
 Restart bind9 dengan `service bind9 restart`
 
