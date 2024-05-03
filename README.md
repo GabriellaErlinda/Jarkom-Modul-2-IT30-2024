@@ -398,3 +398,131 @@ nameserver 192.248.4.2 #IP Georgopol
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/fa41f398-aa02-4fb0-b2e5-91bdc3d54a11)
 
 Terlihat semua client berhasil melakukan ping ke semua domain, tandanya konfigurasi DNS Slave telah berhasil
+
+
+## SOAL 8
+> Kamu juga diperintahkan untuk membuat subdomain khusus melacak airdrop berisi peralatan medis dengan subdomain medkit.airdrop.xxxx.com yang mengarah ke Lipovka
+
+#### Membuat subdomain
+- Pada **Pochinki**, buka file airdrop.it30.com dengan `nano /etc/bind/airdrop/airdrop.it30.com`
+- Tambahkan konfigurasi untuk subdomain seperti ini
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     airdrop.it30.com. root.airdrop.it30.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      airdrop.it30.com.
+@       IN      A       192.248.2.4
+@       IN      AAAA    ::1
+www     IN      CNAME   airdrop.it30.com.
+medkit  IN      A       192.248.2.3
+```
+Restart bind9 dengan `service bind9 restart`
+
+- Zharki
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/ea4d5638-f12f-45f2-98b3-150ec04924af)
+- YasnayaPolyana
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/9557d22f-0d0d-4acf-8662-bf93dd15a9af)
+- Primorsk
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/2e7329fc-51ca-4588-93b0-72eab0ab8977)
+
+## SOAL 9
+> Terkadang red zone yang pada umumnya di bombardir artileri akan dijatuhi bom oleh pesawat tempur. Untuk melindungi warga, kita diperlukan untuk membuat sistem peringatan air raid dan memasukkannya ke domain siren.redzone.xxxx.com dalam folder siren dan pastikan dapat diakses secara mudah dengan menambahkan alias www.siren.redzone.xxxx.com dan mendelegasikan subdomain tersebut ke Georgopol dengan alamat IP menuju radar di Severny
+
+### Konfigurasi Pochinki
+`mkdir /etc/bind/siren`
+`cp /etc/bind/redzone/redzone.it30.com /etc/bind/siren/siren.redzone.it30.com`
+`nano /etc/bind/siren/siren.redzone.it30.com`
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     redzone.it30.com. root.redzone.it30.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      redzone.it30.com.
+@       IN      A       192.248.2.2 ; IP Severny
+www     IN      CNAME   redzone.it30.com.
+siren   IN      A       192.248.4.2 ; IP Georgopol
+ns1     IN      A       192.248.4.2 ; IP Georgopol
+siren   IN      NS      ns1
+@       IN      AAAA    ::1
+```
+Edit file `etc/bind/named.conf.options` pada Pochinki
+```
+nano /etc/bind/named.conf.options
+```
+Tambahkan line berikut
+```
+allow-query{any;};
+```
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/78433e73-defb-4abc-a9de-a39a43030ca6)
+
+Restart bind9 dengan `service bind9 restart`
+
+#### Konfigurasi Georgopol
+- Edit file `/etc/bind/named.conf.options` pada Georgopol
+```
+nano /etc/bind/named.conf.options
+```
+
+- Tambahkan line berikut
+```
+allow-query{any;};
+```
+
+- Buka dan edit file `/etc/bind/named.conf.local`, tambahkan konfigurasi di bawah ini
+```
+zone "siren.redzone.it30.com" {
+    type master;
+    file "/etc/bind/siren/siren.redzone.it30.com";
+};
+```
+
+- Buat folder siren dan copy `db.local` ke `siren.redzone.it30.com`
+```
+mkdir /etc/bind/siren
+cp /etc/bind/db.local /etc/bind/siren/siren.redzone.it30.com
+```
+
+Buka dan edit file `/etc/bind/siren/siren.redzone.it30.com`
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     siren.redzone.it30.com. root.siren.redzone.it30.com. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      siren.redzone.it30.com.
+@       IN      A       192.248.4.2 ; IP Georgopol
+www     IN      CNAME   siren.redzone.it30.com.
+@       IN      AAAA    ::1
+```
+
+Restart bind9 dengan `service bind9 restart`
+
+
+#### Testing
+- Zharki
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/b6a44a24-bc48-4ec9-96e6-fefa34ff4b12)
+- YasnayaPolyana
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/1c117331-71eb-49d4-a20d-e6c73781309e)
+- Primorsk
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/65e68db4-b008-466f-9ce5-3f92d76ed6cd)
