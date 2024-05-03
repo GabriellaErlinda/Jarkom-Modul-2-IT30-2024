@@ -172,3 +172,28 @@ Buka file airdrop.it30.com dan edit seperti ini
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/bb33aa70-541a-4907-80d6-4142133f01c6)
 
 Restart bind9 dengan `service bind9 restart`
+
+## SOAL 3
+#### Pembuatan Domain
+Lakukan command berikut pada Pochinki
+`nano /etc/bind/named.conf.local`
+
+Isikan configurasi domain redzone.it30.com
+```
+zone "redzone.it30.com" {
+	type master;
+	file "/etc/bind/redzone/redzone.it30.com";
+};
+```
+
+Buat folder airdrop di dalam /etc/bind
+```
+mkdir /etc/bind/redzone
+```
+
+Copy file db.local di /etc/bind ke folder airdrop, ubah namanya sesuai nama domain
+```
+cp /etc/bind/db.local /etc/bind/redzone/redzone.it30.com
+```
+
+Buka file redzone.it30.com dan edit seperti ini
