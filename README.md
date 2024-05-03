@@ -230,3 +230,4 @@ Buka file loot.it30.com dan edit seperti ini
 Restart bind9 dengan `service bind9 restart`
 
 ## SOAL 5
+Untuk memastikan
