@@ -301,7 +301,8 @@ host -t PTR 192.248.2.2
 ## SOAL 7
 > Akhir-akhir ini seringkali terjadi serangan siber ke DNS Server Utama, sebagai tindakan antisipasi kamu diperintahkan untuk membuat DNS Slave di Georgopol untuk semua domain yang sudah dibuat sebelumnya
 
-Lakukan command berikut pada Pochinki untuk mengedit file `/etc/bind/named.conf.local`
+#### Pochinki
+Lakukan command berikut untuk mengedit file `/etc/bind/named.conf.local`
 ```
 nano /etc/bind/named.conf.local
 ```
@@ -330,5 +331,42 @@ zone "loot.it30.com" {
 };
 ```
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/eb07d75d-5c2c-41b6-96f1-3e60f4d48a2a)
+
+Restart bind9 dengan `service bind9 restart`
+
+#### Georgopol
+Pastikan Georgopol terhubung dengan internet menggunakan `echo nameserver 192.168.122.1 > /etc/resolv.conf` dimana `192.168.122.1` adalah IP Erangel
+
+Jalankan command berikut
+```
+apt-get update
+apt-get install bind9 -y
+```
+
+Lakukan command berikut untuk mengedit file `/etc/bind/named.conf.local`
+```
+nano /etc/bind/named.conf.local
+```
+
+Buka file dengan `nano /etc/bind/named.conf.local`. Tambahkan konfigurasi berikut pada file tersebut
+```
+zone "airdrop.it30.com" {
+    type slave;
+    masters { 192.248.3.2; };
+    file "/var/lib/bind/airdrop.it30.com";
+};
+
+zone "redzone.it30.com" {
+    type slave;
+    masters { 192.248.3.2; };
+    file "/var/lib/bind/redzone.it30.com";
+};
+
+zone "loot.it30.com" {
+    type slave;
+    masters { 192.248.3.2; };
+    file "/var/lib/bind/loot.it30.com";
+};
+```
 
 Restart bind9 dengan `service bind9 restart`
