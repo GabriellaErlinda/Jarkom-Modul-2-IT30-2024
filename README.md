@@ -197,3 +197,4 @@ cp /etc/bind/db.local /etc/bind/redzone/redzone.it30.com
 ```
 
 Buka file redzone.it30.com dan edit seperti ini
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/0800e8c4-dd0c-45e2-98bf-d7722edfb9a5)
