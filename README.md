@@ -121,3 +121,14 @@ iface eth0 inet static
     netmask 255.255.255.0
     gateway 192.248.1.1
 ```
+
+Pada Erangel, cek `ip a` untuk melihat apakah semua config sudah sesuai IP Prefix.
+
+Pada Erangel dijalankan command berikut untuk mengatur semua lalu lintas dalam komputer, `MASQUERADE` digunakan untuk menyamarkan paket, dan `-s` untuk menspesifikasikan pada source IP nya
+```
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.248.0.0/16
+```
+Ketikkan command `cat /etc/resolv.conf` pada Erangel
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/f813ec50-abe0-4c3a-8bac-3f9a19c9ae40)
+
+Ketikkan command ini di setiap node yang lain echo nameserver `[IP DNS] > /etc/resolv.conf`. Pada kasus ini maka command-nya adalah `echo nameserver 192.168.122.1 > /etc/resolv.conf`.
