@@ -296,3 +296,39 @@ host -t PTR 192.248.2.2
 
 - Primorsk
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/54088eb4-c115-4461-beca-2fba6fea3168)
+
+
+## SOAL 7
+> Akhir-akhir ini seringkali terjadi serangan siber ke DNS Server Utama, sebagai tindakan antisipasi kamu diperintahkan untuk membuat DNS Slave di Georgopol untuk semua domain yang sudah dibuat sebelumnya
+
+Lakukan command berikut pada Pochinki untuk mengedit file `/etc/bind/named.conf.local`
+```
+nano /etc/bind/named.conf.local
+```
+
+Edit konfigurasi untuk setiap domain menjadi seperti ini, dimana `192.248.4.2` adalah IP Georgopol yang akan dijadikan DNS Slave
+```
+zone "airdrop.it30.com" {
+    type master;
+    also-notify { 192.248.4.2; };
+    allow-transfer { 192.248.4.2; };
+    file "/etc/bind/airdrop/airdrop.it30.com";
+};
+
+zone "redzone.it30.com" {
+    type master;
+    also-notify { 192.248.4.2; };
+    allow-transfer { 192.248.4.2; };
+    file "/etc/bind/redzone/redzone.it30.com";
+};
+
+zone "loot.it30.com" {
+    type master;
+    also-notify { 192.248.4.2; };
+    allow-transfer { 192.248.4.2; };
+    file "/etc/bind/loot/loot.it30.com";
+};
+```
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/eb07d75d-5c2c-41b6-96f1-3e60f4d48a2a)
+
+Restart bind9 dengan `service bind9 restart`
