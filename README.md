@@ -9,10 +9,10 @@
 
 
 ## SOAL 1
-Untuk membantu pertempuran di Erangel, kamu ditugaskan untuk membuat jaringan komputer yang akan digunakan sebagai alat komunikasi. Sesuaikan rancangan Topologi dengan rancangan dan pembagian yang berada di link yang telah disediakan, dengan ketentuan nodenya sebagai berikut :
-- DNS Master akan diberi nama `Pochinki`, sesuai dengan kota tempat dibuatnya server tersebut
-- Karena ada kemungkinan musuh akan mencoba menyerang Server Utama, maka buatlah DNS Slave `Georgopol` yang mengarah ke Pochinki
-- Markas pusat juga meminta dibuatkan tiga Web Server yaitu `Severny, Stalber, dan Lipovka`. Sedangkan `Mylta` akan bertindak sebagai Load Balancer untuk server-server tersebut
+> Untuk membantu pertempuran di Erangel, kamu ditugaskan untuk membuat jaringan komputer yang akan digunakan sebagai alat komunikasi. Sesuaikan rancangan Topologi dengan rancangan dan pembagian yang berada di link yang telah disediakan, dengan ketentuan nodenya sebagai berikut :
+> - DNS Master akan diberi nama `Pochinki`, sesuai dengan kota tempat dibuatnya server tersebut
+> - Karena ada kemungkinan musuh akan mencoba menyerang Server Utama, maka buatlah DNS Slave `Georgopol` yang mengarah ke Pochinki
+> - Markas pusat juga meminta dibuatkan tiga Web Server yaitu `Severny, Stalber, dan Lipovka`. Sedangkan `Mylta` akan bertindak sebagai Load Balancer untuk server-server tersebut
 
 ### Topologi Jaringan
 ![Screenshot 2024-05-02 184745](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/9c2350ac-87da-4f1a-878c-861497e64af9)
@@ -137,7 +137,7 @@ Untuk node yang lain, gunakan command `echo nameserver [IP DNS] > /etc/resolv.co
 
 
 ## SOAL 2
-Karena para pasukan membutuhkan koordinasi untuk mengambil airdrop, maka buatlah sebuah domain yang mengarah ke Stalber dengan alamat airdrop.xxxx.com dengan alias www.airdrop.xxxx.com dimana xxxx merupakan kode kelompok. Contoh : airdrop.it30.com
+> Karena para pasukan membutuhkan koordinasi untuk mengambil airdrop, maka buatlah sebuah domain yang mengarah ke Stalber dengan alamat airdrop.xxxx.com dengan alias www.airdrop.xxxx.com dimana xxxx merupakan kode kelompok. Contoh : airdrop.it30.com
 
 Pada Pochinki jalankan command `apt-get update` lalu `apt-get install bind9 -y` untuk install bind9.
 #### Pembuatan Domain
@@ -167,6 +167,8 @@ Buka file airdrop.it30.com dan edit seperti ini
 Restart bind9 dengan `service bind9 restart`
 
 ## SOAL 3
+> Para pasukan juga perlu mengetahui mana titik yang sedang di bombardir artileri, sehingga dibutuhkan domain lain yaitu redzone.xxxx.com dengan alias www.redzone.xxxx.com yang mengarah ke Severny
+
 #### Pembuatan Domain
 Lakukan command berikut pada Pochinki
 `nano /etc/bind/named.conf.local`
@@ -195,6 +197,8 @@ Buka file redzone.it30.com dan edit seperti ini
 Restart bind9 dengan `service bind9 restart`
 
 ## SOAL 4
+> Markas pusat meminta dibuatnya domain khusus untuk menaruh informasi persenjataan dan suplai yang tersebar. Informasi persenjataan dan suplai tersebut mengarah ke Mylta dan domain yang ingin digunakan adalah loot.xxxx.com dengan alias www.loot.xxxx.com
+
 #### Pembuatan Domain
 Lakukan command berikut pada Pochinki
 `nano /etc/bind/named.conf.local`
