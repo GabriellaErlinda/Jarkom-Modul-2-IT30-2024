@@ -131,16 +131,9 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.248.0.0/16
 Ketikkan command `cat /etc/resolv.conf` pada Erangel
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/f813ec50-abe0-4c3a-8bac-3f9a19c9ae40)
 
-Ketikkan command ini di setiap node yang lain echo nameserver `[IP DNS] > /etc/resolv.conf`. Pada kasus ini maka command-nya adalah `echo nameserver 192.168.122.1 > /etc/resolv.conf`.
-![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/5a97caeb-152c-4383-acb7-fa8db908b81c)
-![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/84801667-21c0-4441-bc5f-c2c4bf652962)
-![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/c63e4952-f03d-4ee2-a653-0ef7f2664517)
-![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/f924fa5d-0e03-4ab7-80e2-345801c8be18)
-![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/acc8dd1f-445c-461b-beaf-54ddf9689a81)
-![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/ebd86940-755a-4685-9167-2deaed932bdf)
-![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/d986d158-a87b-4ee4-a97f-f06562d2054e)
-![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/731b4a06-fd34-447a-87a7-e95e3da714ef)
-![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/33d6bb1d-84a1-4249-8c01-1650e52efd53)
+Ketikkan command ini pada Pochinki, `echo nameserver [IP DNS] > /etc/resolv.conf`. Pada kasus ini maka command-nya adalah `echo nameserver 192.168.122.1 > /etc/resolv.conf`.
+
+Untuk node yang lain, gunakan command `echo nameserver [IP DNS] > /etc/resolv.conf` dengan IP Pochinki yaitu `192.248.3.2`. Maka command nya adalah `echo nameserver 192.248.3.2 > /etc/resolv.conf`
 
 
 ## SOAL 2
@@ -229,5 +222,19 @@ Buka file loot.it30.com dan edit seperti ini
 
 Restart bind9 dengan `service bind9 restart`
 
+
 ## SOAL 5
-Untuk memastikan
+Untuk memastikan bahwa semua komputer (client) dapat mengakses domain yang telah dibuat, jalankan command `ping [domain]` pada setiap komputer
+
+- Zharki
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/d1fed4f0-c9c2-4530-8171-6f07c555d791)
+
+- YasnayaPolyana
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/4168e968-a0a5-4ac5-921a-c2f76d754f23)
+
+- Primorsk
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/80d23d52-c6f3-4567-9321-a45c231fc8cc)
+
+
+## SOAL 6
+> Beberapa daerah memiliki keterbatasan yang menyebabkan hanya dapat mengakses domain secara langsung melalui alamat IP domain tersebut. Karena daerah tersebut tidak diketahui secara spesifik, pastikan semua komputer (client) dapat mengakses domain redzone.xxxx.com melalui alamat IP Severny (Notes : menggunakan pointer record)
