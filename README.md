@@ -277,3 +277,10 @@ Buka file 2.248.192.in-addr.arpa dengan `nano /etc/bind/jarkom/2.248.192.in-addr
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/1db55f7e-df00-4b01-95a6-3b4beafcfffd)
 
 Restart bind9 dengan `service bind9 restart`
+
+Untuk mengecek apakah konfigurasi sudah benar atau belum, pertama kembalikan nameserver client ke Erangel dengan `echo nameserver 192.168.122.1 > /etc/resolv.conf`, lalu lakukan command ini untuk setiap client
+```
+apt-get update
+apt-get install dnsutils
+```
+Lalu kembalikan nameserver ke Pochinki dengan `echo nameserver 192.248.3.2 > /etc/resolv.conf`
