@@ -225,6 +225,8 @@ cp /etc/bind/db.local /etc/bind/loot/loot.it30.com
 ```
 
 Buka file loot.it30.com dan edit seperti ini
-
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/71d0c88b-d17c-4acf-b6a2-01dd1176d68e)
 
 Restart bind9 dengan `service bind9 restart`
+
+## SOAL 5
