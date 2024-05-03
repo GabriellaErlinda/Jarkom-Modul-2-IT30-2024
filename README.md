@@ -135,14 +135,17 @@ Ketikkan command ini pada Pochinki, `echo nameserver [IP DNS] > /etc/resolv.conf
 
 Untuk node yang lain, gunakan command `echo nameserver [IP DNS] > /etc/resolv.conf` dengan IP Pochinki yaitu `192.248.3.2`. Maka command nya adalah `echo nameserver 192.248.3.2 > /etc/resolv.conf`
 
+Pada Pochinki jalankan command `apt-get update` lalu `apt-get install bind9 -y` untuk install bind9.
 
 ## SOAL 2
 > Karena para pasukan membutuhkan koordinasi untuk mengambil airdrop, maka buatlah sebuah domain yang mengarah ke Stalber dengan alamat airdrop.xxxx.com dengan alias www.airdrop.xxxx.com dimana xxxx merupakan kode kelompok. Contoh : airdrop.it30.com
 
-Pada Pochinki jalankan command `apt-get update` lalu `apt-get install bind9 -y` untuk install bind9.
 #### Pembuatan Domain
-Lakukan command berikut pada Pochinki
-`nano /etc/bind/named.conf.local`
+Lakukan command berikut pada Pochinki untuk mengedit file `/etc/bind/named.conf.local`
+```
+nano /etc/bind/named.conf.local
+```
+
 Isikan configurasi domain airdrop.it30.com
 ```
 zone "airdrop.it30.com" {
@@ -161,7 +164,7 @@ Copy file db.local di /etc/bind ke folder airdrop, ubah namanya sesuai nama doma
 cp /etc/bind/db.local /etc/bind/airdrop/airdrop.it30.com
 ```
 
-Buka file airdrop.it30.com dan edit seperti ini
+Buka file airdrop.it30.com dengan `nano /etc/bind/airdrop/airdrop.it30.com` dan edit seperti ini
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/bb33aa70-541a-4907-80d6-4142133f01c6)
 
 Restart bind9 dengan `service bind9 restart`
@@ -170,8 +173,10 @@ Restart bind9 dengan `service bind9 restart`
 > Para pasukan juga perlu mengetahui mana titik yang sedang di bombardir artileri, sehingga dibutuhkan domain lain yaitu redzone.xxxx.com dengan alias www.redzone.xxxx.com yang mengarah ke Severny
 
 #### Pembuatan Domain
-Lakukan command berikut pada Pochinki
-`nano /etc/bind/named.conf.local`
+Lakukan command berikut pada Pochinki untuk mengedit file `/etc/bind/named.conf.local`
+```
+nano /etc/bind/named.conf.local
+```
 
 Isikan configurasi domain redzone.it30.com
 ```
@@ -191,7 +196,7 @@ Copy file db.local di /etc/bind ke folder airdrop, ubah namanya sesuai nama doma
 cp /etc/bind/db.local /etc/bind/redzone/redzone.it30.com
 ```
 
-Buka file redzone.it30.com dan edit seperti ini
+Buka file redzone.it30.com dengan `nano /etc/bind/redzone/redzone.it30.com` dan edit seperti ini
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/0800e8c4-dd0c-45e2-98bf-d7722edfb9a5)
 
 Restart bind9 dengan `service bind9 restart`
@@ -200,8 +205,10 @@ Restart bind9 dengan `service bind9 restart`
 > Markas pusat meminta dibuatnya domain khusus untuk menaruh informasi persenjataan dan suplai yang tersebar. Informasi persenjataan dan suplai tersebut mengarah ke Mylta dan domain yang ingin digunakan adalah loot.xxxx.com dengan alias www.loot.xxxx.com
 
 #### Pembuatan Domain
-Lakukan command berikut pada Pochinki
-`nano /etc/bind/named.conf.local`
+Lakukan command berikut pada Pochinki untuk mengedit file `/etc/bind/named.conf.local`
+```
+nano /etc/bind/named.conf.local
+```
 
 Isikan configurasi domain redzone.it30.com
 ```
@@ -221,7 +228,7 @@ Copy file db.local di /etc/bind ke folder airdrop, ubah namanya sesuai nama doma
 cp /etc/bind/db.local /etc/bind/loot/loot.it30.com
 ```
 
-Buka file loot.it30.com dan edit seperti ini
+Buka file loot.it30.com dengan `nano /etc/bind/loot/loot.it30.com` dan edit seperti ini
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/71d0c88b-d17c-4acf-b6a2-01dd1176d68e)
 
 Restart bind9 dengan `service bind9 restart`
@@ -242,3 +249,31 @@ Untuk memastikan bahwa semua komputer (client) dapat mengakses domain yang telah
 
 ## SOAL 6
 > Beberapa daerah memiliki keterbatasan yang menyebabkan hanya dapat mengakses domain secara langsung melalui alamat IP domain tersebut. Karena daerah tersebut tidak diketahui secara spesifik, pastikan semua komputer (client) dapat mengakses domain redzone.xxxx.com melalui alamat IP Severny (Notes : menggunakan pointer record)
+
+Lakukan command berikut pada Pochinki untuk mengedit file `/etc/bind/named.conf.local`
+```
+nano /etc/bind/named.conf.local
+```
+
+Lalu tambahkan konfigurasi berikut ke dalam file `named.conf.local`. Tambahkan reverse dari 3 byte awal dari IP Severny yaitu `192.248.2.2`, maka reverse 3 byte awalnya `2.248.192`.
+```
+zone "2.248.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/jarkom/2.248.192.in-addr.arpa";
+};
+```
+
+Buat direktori jarkom
+```
+mkdir /etc/bind/jarkom
+```
+
+Copy file db.local di /etc/bind ke folder jarkom, ubah namanya menjadi `2.248.192.in-addr.arpa`
+```
+cp /etc/bind/db.local /etc/bind/jarkom/2.248.192.in-addr.arpa
+```
+
+Buka file 2.248.192.in-addr.arpa dengan `nano /etc/bind/jarkom/2.248.192.in-addr.arpa` dan edit seperti ini
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/1db55f7e-df00-4b01-95a6-3b4beafcfffd)
+
+Restart bind9 dengan `service bind9 restart`
