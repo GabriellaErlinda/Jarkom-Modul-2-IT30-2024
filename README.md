@@ -470,6 +470,15 @@ allow-query{any;};
 ```
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/78433e73-defb-4abc-a9de-a39a43030ca6)
 
+Buka dan edit file `/etc/bind/named.conf.local` menjadi seperti ini:
+```
+zone "siren.redzone.it30.com" {
+    type master;
+    file "/etc/bind/siren/siren.redzone.it30.com";
+    allow-transfer { 192.248.4.2; };
+};
+```
+
 Restart bind9 dengan `service bind9 restart`
 
 #### Konfigurasi Georgopol
