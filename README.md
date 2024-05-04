@@ -559,3 +559,46 @@ Restart bind9 dengan `service bind9 restart`
 ## SOAL 11
 > Setelah pertempuran mereda, warga Erangel dapat kembali mengakses jaringan luar, tetapi hanya warga Pochinki saja yang dapat mengakses jaringan luar secara langsung. Buatlah konfigurasi agar warga Erangel yang berada diluar Pochinki dapat mengakses jaringan luar melalui DNS Server Pochinki
 
+Buka dan edit file : `nano /etc/bind/named.conf.options`
+
+- Uncomment bagian berikut dan ganti dengan IP nameserver Erangel
+```
+forwarders {
+    192.168.122.1;
+};
+```
+- Comment pada bagian ini
+```
+// dnssec-validation auto;
+```
+- Kemudian tambahkan
+```
+allow-query{any;};
+```
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/4f9f3d61-e639-485b-b315-e025cac0fd72)
+
+- Restart bind9 dengan `service bind9 restart`
+
+- Pada node lain, ubah nameserver ke `IP Pochinki` saja pada `/etc/resolv.conf`, lalu coba `ping google.com`
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/8326f24e-7e82-4d93-88ca-21ff35f097eb)
+
+#### Testing
+- Zharki
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/857b6337-38e0-46ab-bc52-d92cc827704f)
+- YasnayaPolyana
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/04355e65-8d42-4ac8-9a5d-4f9e30fad557)
+- Primorsk
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/ab6bc50d-dff4-451a-a654-e82c6b47372e)
+- Severny
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/c3bc1147-4e9b-4192-a622-060c4d24d80a)
+- Lipovka
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/9e928763-f60c-46ed-9135-73ab9ed448a9)
+- Stalber
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/471f3484-cbfc-4cd4-8813-a8d743ab783b)
+- Mylta
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/53eb571b-38dd-4901-9cdf-71c42a99b26a)
+
+
+## SOAL 12
+> Karena pusat ingin sebuah website yang ingin digunakan untuk memantau kondisi markas lainnya maka deploy lah webiste ini (cek resource yg lb) pada severny menggunakan apache
+
