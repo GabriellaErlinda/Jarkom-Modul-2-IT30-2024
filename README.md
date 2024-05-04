@@ -538,3 +538,24 @@ Restart bind9 dengan `service bind9 restart`
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/1c117331-71eb-49d4-a20d-e6c73781309e)
 - Primorsk
 ![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/65e68db4-b008-466f-9ce5-3f92d76ed6cd)
+
+
+## SOAL 10
+> Markas juga meminta catatan kapan saja pesawat tempur tersebut menjatuhkan bom, maka buatlah subdomain baru di subdomain siren yaitu log.siren.redzone.xxxx.com serta aliasnya www.log.siren.redzone.xxxx.com yang juga mengarah ke Severny
+
+- Pada Georgopol, buka dan edit file `/etc/bind/siren/siren.redzone.it30.com` seperti di bawah ini untuk menambahkan subdomain `www.log.siren.redzone.it30.com`
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/75e83bae-8615-4177-9c9c-f4404bf44b47)
+
+Restart bind9 dengan `service bind9 restart`
+
+- Zharki
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/dbc7c67d-ea38-45b0-9f0e-578ba96dc1c7)
+- YasnayaPolyana
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/2be48b59-64bd-49c8-8853-be4c4c8f5490)
+- Primorsk
+![image](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/assets/128443451/ef740290-730d-41dc-9ad6-e1ccedf67e20)
+
+
+## SOAL 11
+> Setelah pertempuran mereda, warga Erangel dapat kembali mengakses jaringan luar, tetapi hanya warga Pochinki saja yang dapat mengakses jaringan luar secara langsung. Buatlah konfigurasi agar warga Erangel yang berada diluar Pochinki dapat mengakses jaringan luar melalui DNS Server Pochinki
+
