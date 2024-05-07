@@ -615,7 +615,11 @@ apt-get install apache2 -y
 nano /etc/apache2/sites-available/000-default.conf
 service apache2 restart
 ```
-gambar ip
+![gaba1](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-06%20224138.png)
+![gabar2](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-06%20224254.png)
+![gmba3](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-06%20225239.png)
+![gambling4](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-06%20225348.png)
+![gbaam5](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-06%20231548.png)
 
 ## SOAL 14
 >Mereka juga belum merasa puas jadi pusat meminta agar web servernya dan load balancer nya diubah menjadi nginx
@@ -653,7 +657,7 @@ nano /etc/nginx/nginx.conf
 
 'include    /etc/nginx/jarkom2024/*.conf'
 ```
-gambar line
+![gambar line](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-07%20202358.png)
 -Tambah link baru untuk algoritma
 ```
 	server {
@@ -749,6 +753,7 @@ ab -n 1000 -c 100 http://weightedrr.myIta.com/
 ```
     ServerAlias www.mylta.it30.com
 ```
+![magi1](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-07%20144802.png)
 ### SOAL 17
 >Agar aman, buatlah konfigurasi agar mylta.xxx.com hanya dapat diakses melalui port 14000 dan 14400.
 -Tambah command ini dibawah virtualhost:80
@@ -765,6 +770,7 @@ ab -n 1000 -c 100 http://weightedrr.myIta.com/
     ProxyPassReverse / balancer://myita_balancer/
 </VirtualHost>
 ```
+![miga](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-07%20154917.png)
 ### SOAL 18
 >Apa bila ada yang mencoba mengakses IP mylta akan secara otomatis dialihkan ke www.mylta.xxx.com
 -Tambah kebagian virtualhost:80
@@ -772,3 +778,4 @@ ab -n 1000 -c 100 http://weightedrr.myIta.com/
     RewriteCond %{HTTP_HOST} ^192\.248\.2\.5$
     RewriteRule ^(.*)$ http://www.mylta.it30.com/$1 [L,R=301]
 ```
+![ayayay](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-07%20172106.png)
