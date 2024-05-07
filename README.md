@@ -602,3 +602,173 @@ allow-query{any;};
 ## SOAL 12
 > Karena pusat ingin sebuah website yang ingin digunakan untuk memantau kondisi markas lainnya maka deploy lah webiste ini (cek resource yg lb) pada severny menggunakan apache
 
+## SOAL 13
+>Tapi pusat merasa tidak puas dengan performanya karena traffic yag tinggi maka pusat meminta kita memasang load balancer pada web nya, dengan Severny, Stalber, Lipovka sebagai worker dan Mylta sebagai Load Balancer menggunakan apache sebagai web server nya dan load balancernya
+
+-Sebelum memulai modifikasi file .config harus dulu diawali dengan menginstall apache2 pada Severny,Stalber,Lipovka,dan MyIta
+```
+apt-get update
+apt-get install apache2 -y
+```
+-Kedua,masuk ke masing masing file config dan uncomment ServerName dan ganti example ke [Prefix IP].2.x
+```
+nano /etc/apache2/sites-available/000-default.conf
+service apache2 restart
+```
+gambar ip
+
+## SOAL 14
+>Mereka juga belum merasa puas jadi pusat meminta agar web servernya dan load balancer nya diubah menjadi nginx
+```
+apt-get update
+apt-get install nginx
+```
+-Pertama,buat folder dan file config baru untuk menyimpan load manager
+```
+nano /etc/nginx/jarkom2024/load.conf
+    upstream roundrobin_backend {
+        server 192.248.2.2;
+        server 192.248.2.3;
+        server 192.248.2.4;
+    }
+
+    upstream leastconn_backend {
+        least_conn;
+        server 192.248.2.2;
+        server 192.248.2.3;
+        server 192.248.2.4;
+    }
+
+    upstream weightedrr_backend {
+        server 192.248.2.2; weight=3
+        server 192.248.2.3; weight=2
+        server 192.248.2.4; weight=1
+    }
+
+```
+-Kedua,tambah line include di nginx.conf
+```
+nano /etc/nginx/nginx.conf
+
+
+'include    /etc/nginx/jarkom2024/*.conf'
+```
+gambar line
+-Tambah link baru untuk algoritma
+```
+	server {
+        	listen 80;
+        	server_name mynginx.example.com;
+
+        	location /roundrobin {
+            		proxy_pass http://roundrobin_backend;
+        	}	
+
+        	location /leastconn {
+            		proxy_pass http://leastconn_backend;
+        	}
+
+        	location /weightedrr {
+            		proxy_pass http://weightedrr_backend;
+        	}
+	}
+```
+```
+service nginx restart
+```
+###  SOAL 15
+>Markas pusat meminta laporan hasil benchmark dengan menggunakan apache benchmark dari load balancer dengan 2 web server yang berbeda tersebut dan meminta secara detail dengan ketentuan:
+>	-Nama Algoritma Load Balancer
+>	-Report hasil testing apache benchmark 
+>	-Grafik request per second untuk masing masing algoritma. 
+>	-Analisis
+
+Install
+```
+apt-get update
+apt-get install libapache2-mod-php7.0 -y
+a2enmod proxy
+a2enmod proxy_balancer
+a2enmod proxy_http
+a2enmod lbmethod_byrequests
+a2enmod lbmethod_bytraffic
+a2enmod rewrite
+service apache2 restart
+```
+-Buat load manager
+```
+<VirtualHost *:80>
+    ServerName 192.248.2.5
+
+    <Proxy balancer://roundrobin>
+        BalancerMember http://192.248.2.2:80 
+        BalancerMember http://192.248.2.3:80 
+        BalancerMember http://192.248.2.4:80 
+    </Proxy>
+
+    <Proxy balancer://leastconn>
+        BalancerMember http://192.248.2.2:80 
+        BalancerMember http://192.248.2.3:80 
+        BalancerMember http://192.248.2.4:80 
+        ProxySet lbmethod=bytraffic
+    </Proxy>
+
+    <Proxy balancer://weightedrr>
+        ProxySet lbmethod=byrequests
+        ProxySet stickysession=ROUTEID
+        BalancerMember http://192.248.2.2:80 
+        BalancerMember http://192.248.2.3:80 
+        BalancerMember http://192.248.2.4:80 
+    </Proxy>
+
+    RewriteEngine On
+    RewriteCond %{HTTP_HOST} ^roundrobin\.myIta$ [NC]
+    RewriteRule ^/(.*)$ balancer://roundrobin/$1 [P,L]
+
+    RewriteCond %{HTTP_HOST} ^leastconn\.myIta$ [NC]
+    RewriteRule ^/(.*)$ balancer://leastconn/$1 [P,L]
+
+    RewriteCond %{HTTP_HOST} ^weightedrr\.myIta$ [NC]
+    RewriteRule ^/(.*)$ balancer://weightedrr/$1 [P,L]
+
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+-Tes
+```
+ab -n 1000 -c 100 http://roundrobin.myIta.com/
+ab -n 1000 -c 100 http://leastconn.myIta.com/
+ab -n 1000 -c 100 http://weightedrr.myIta.com/
+```
+### SOAL 16
+>Karena dirasa kurang aman karena masih memakai IP, markas ingin akses ke mylta memakai mylta.xxx.com dengan alias www.mylta.xxx.com (sesuai web server terbaik hasil analisis kalian)
+```
+    ServerAlias www.mylta.it30.com
+```
+### SOAL 17
+>Agar aman, buatlah konfigurasi agar mylta.xxx.com hanya dapat diakses melalui port 14000 dan 14400.
+-Tambah command ini dibawah virtualhost:80
+```
+<VirtualHost *:14400>
+    ServerName mylta.it30.com
+    ServerAlias www.mylta.it30.com
+
+    <Proxy balancer://myita_balancer>
+        BalancerMember http://MyIta:14400
+    </Proxy>
+
+    ProxyPass / balancer://myita_balancer/
+    ProxyPassReverse / balancer://myita_balancer/
+</VirtualHost>
+```
+### SOAL 18
+>Apa bila ada yang mencoba mengakses IP mylta akan secara otomatis dialihkan ke www.mylta.xxx.com
+-Tambah kebagian virtualhost:80
+```
+    RewriteCond %{HTTP_HOST} ^192\.248\.2\.5$
+    RewriteRule ^(.*)$ http://www.mylta.it30.com/$1 [L,R=301]
+```
