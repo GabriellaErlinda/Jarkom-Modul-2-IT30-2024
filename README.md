@@ -621,6 +621,9 @@ service apache2 restart
 ![gambling4](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-06%20225348.png)
 ![gbaam5](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-06%20231548.png)
 
+Hasil
+![gaba2](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-08%20153229.png)
+![gabar3](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-08%20153426.png)
 ## SOAL 14
 >Mereka juga belum merasa puas jadi pusat meminta agar web servernya dan load balancer nya diubah menjadi nginx
 ```
@@ -779,3 +782,5 @@ ab -n 1000 -c 100 http://weightedrr.myIta.com/
     RewriteRule ^(.*)$ http://www.mylta.it30.com/$1 [L,R=301]
 ```
 ![ayayay](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-07%20172106.png)
+Hasil
+![gmba4](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-08%20153307.png)
