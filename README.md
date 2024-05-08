@@ -602,6 +602,31 @@ allow-query{any;};
 ## SOAL 12
 > Karena pusat ingin sebuah website yang ingin digunakan untuk memantau kondisi markas lainnya maka deploy lah webiste ini (cek resource yg lb) pada severny menggunakan apache
 
+Install apache2 di pochinki ```apt-get install apache2 -y```
+
+-Tambahkan kode ini di apache2 000-default.conf
+```
+
+    ProxyPass /airdrop http://airdrop.it30.com
+    ProxyPassReverse /airdrop http://airdrop.it30.com
+
+    ProxyPass /redzone http://redzone.it30.com
+    ProxyPassReverse /redzone http://redzone.it30.com
+
+    ProxyPass /loot http://loot.it30.com
+    ProxyPassReverse /loot http://loot.it30.com
+
+    ProxyPass /siren http://siren.redzone.it30.com
+    ProxyPassReverse /siren http://siren.redzone.it30.com
+
+    ProxyPass /medikit http://medkit.airdrop.xxxx.com
+    ProxyPassReverse /medikit http://medkit.airdrop.xxxx.com
+```
+
+![gabar3](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-08%20212558.png)
+![gmba4](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-08%20212646.png)
+
+
 ## SOAL 13
 >Tapi pusat merasa tidak puas dengan performanya karena traffic yag tinggi maka pusat meminta kita memasang load balancer pada web nya, dengan Severny, Stalber, Lipovka sebagai worker dan Mylta sebagai Load Balancer menggunakan apache sebagai web server nya dan load balancernya
 
@@ -784,3 +809,35 @@ ab -n 1000 -c 100 http://weightedrr.myIta.com/
 ![ayayay](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-07%20172106.png)
 Hasil
 ![gmba4](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-08%20153307.png)
+
+### SOAL 19
+>Karena probset sudah kehabisan ide masuk ke salah satu worker buatkan akses direktori listing yang mengarah ke resource worker2
+```
+ DocumentRoot /etc/apache2/worker2/resource
+    <Directory /etc/apache2/worker2/resource>
+        Options +Indexes
+        IndexOptions FancyIndexing HTMLTable NameWidth=* DescriptionWidth=*
+        AllowOverride All
+        Require all granted
+    </Directory>
+```
+
+### SOAL 20
+>Worker tersebut harus dapat di akses dengan tamat.xxx.com dengan alias www.tamat.xxx.com
+-Tambah virtualhost baru untuk servername tamat
+```
+<VirtualHost *:80>
+    ServerName tamat.it30.com
+    ServerAlias www.tamat.it30.com
+
+    DocumentRoot /etc/apache2/worker2/resource
+    <Directory /etc/apache2/worker2/resource>
+        Options +Indexes
+        IndexOptions FancyIndexing HTMLTable NameWidth=* DescriptionWidth=*
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+![gambling5](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-08%20212730.png)
+![gbaam6](https://github.com/GabriellaErlinda/Jarkom-Modul-2-IT30-2024/blob/main/gambar/Screenshot%202024-05-08%20212750.png)
