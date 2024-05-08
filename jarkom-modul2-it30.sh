@@ -120,7 +120,7 @@ $TTL    604800
                          604800 )       ; Negative Cache TTL
 ;
 2.248.192.in-addr.arpa  IN      NS      redzone.it30.com.
-2                       IN      PTR     redzone.it30.com.' > /etc/bind/loot/loot.it30.com
+2                       IN      PTR     redzone.it30.com.' > /etc/bind/jarkom/2.248.192.in-addr.arpa
 
 # Menyalin file redzone ke siren
 cp /etc/bind/redzone/redzone.it30.com /etc/bind/siren/siren.redzone.it30.com
@@ -213,7 +213,7 @@ $TTL    604800
 @       IN      A       192.248.4.2 ; IP Georgopol
 www     IN      CNAME   siren.redzone.it30.com.
 log     IN      A       192.248.4.2 ; IP Georgopol
-www.log IN      CNAME   siren.redzone.it30.com
+www.log IN      CNAME   siren.redzone.it30.com.
 @       IN      AAAA    ::1' > /etc/bind/siren/siren.redzone.it30.com
 
 service bind9 restart
