@@ -1,4 +1,4 @@
-# Lapres-Jarkom-Modul-1-IT30-2024
+# Lapres-Jarkom-Modul-2-IT30-2024
 
 ## Anggota
 
